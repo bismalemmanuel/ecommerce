@@ -145,6 +145,15 @@ a {
     gap: 1rem;
 }
 
+footer {
+    height: 50px;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
 @media (min-width: 900px) {
     .contentCartShop {
         width: 30%;
