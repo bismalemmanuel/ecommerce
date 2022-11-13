@@ -104,7 +104,7 @@ const loadingAcademlo = () =>{
 
         setTimeout(()=>{
             containerLoading.style.display = 'none';
-        },500);
+        },3000);
 
     });
 }
