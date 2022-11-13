@@ -1,94 +1,61 @@
-let foods = [
+let products = [
     {
         id: 0,
-        name: "Algo raro",
-        price: 1200,
-        stock: 5,
-        urlImage: "./assets/images/algoRaro.png",
+        name: "Hoddies",
+        price: 14,
+        stock: 3,
+        urlImage: "./assets/images/featured1.png",
     },
     {
         id: 1,
-        name: "Comida sana",
-        price: 1300,
-        stock: 7,
-        urlImage: "./assets/images/comidaSana.png",
+        name: "Shirt",
+        price: 24,
+        stock: 20,
+        urlImage: "./assets/images/featured2.png",
     },
     {
         id: 2,
-        name: "Ensalada",
-        price: 1400,
-        stock: 8,
-        urlImage: "./assets/images/ensalada.png",
-    },
-    {
-        id: 3,
-        name: "Hamburguesa",
-        price: 1400,
-        stock: 8,
-        urlImage: "./assets/images/hambur.png",
-    },
-    {
-        id: 4,
-        name: "Perrito",
-        price: 1500,
-        stock: 5,
-        urlImage: "./assets/images/perrito.png",
-    },
-    {
-        id: 5,
-        name: "Pez",
-        price: 2000,
-        stock: 3,
-        urlImage: "./assets/images/pez.png",
-    },
-    {
-        id: 6,
-        name: "Pizza",
-        price: 3000,
-        stock: 11,
-        urlImage: "./assets/images/pizza.png",
-    },
-    {
-        id: 7,
-        name: "Pez",
-        price: 1700,
-        stock: 5,
-        urlImage: "./assets/images/pez.png",
-    },
-    {
-        id: 8,
-        name: "Pizza",
-        price: 1900,
-        stock: 11,
-        urlImage: "./assets/images/pizza.png",
+        name: "Sweatshirts",
+        price: 24,
+        stock: 20,
+        urlImage: "./assets/images/featured3.png",
     },
 ];
 
-const contentFoods = document.querySelector(".contentFoods");
-const iconCart = document.querySelector(".bx-cart-alt");
-const contentCartShop = document.querySelector(".contentCartShop");
+
+
+const contentCartShop = document.querySelector(".main__shoppingCart");
+const detailsContent = document.querySelector(".details__content");
 const contentCartShopItems = document.querySelector(".contentCartShop__items");
 const contentCartShopTotal = document.querySelector(".contentCartShop__total");
-const countFood = document.querySelector(".countFood");
+const countProducts = document.querySelector(".cart__count");
+
+const iconCart = document.querySelector(".bx-cart-alt");
+
+const contentProduct = document.querySelector(".main__filter");
+
+
+
+iconCart.addEventListener("click", ()=>{
+    contentCartShop.classList.toggle("main__shoppingCart_show")
+});
+
+ 
+detailsContent.addEventListener("click", ()=>{
+    contentCartShop.classList.remove("main__shoppingCart_show")
+});
 
 let objCartShop = {};
 
-function addFood(idFood) {
-    const currentFood = foods.find((food) => food.id === idFood);
+function addProduct(idProduct){
+    const currentProducts = products.find((product) => product.id === idProduct);
 
-    if (currentFood.stock === objCartShop[idFood].amount)
-        return alert("No hay mas productos en el stock");
+    if(currentProducts.stock==objCartShop[currentProducts.id].amount)
+        return alert('No hay mas productos en el stock')
 
-    objCartShop[currentFood.id].amount++;
-}
+    objCartShop[currentProducts.id].amount++;
 
-function deletefood(idFood) {
-    const op = confirm("Seguro que quieres eliminar?");
-
-    if (op) {
-        delete objCartShop[idFood];
-    }
-}
+};
 
 function countProduct() {
     const arrayCartShop = Object.values(objCartShop);
@@ -98,69 +65,122 @@ function countProduct() {
         return acum;
     }, 0);
 
-    countFood.textContent = suma;
+    countProducts.textContent = suma;
+    
 }
 
-function printTotal() {
+function deleteProduct(idProduct){
+    const op = confirm('Seguro que quieres eliminar');
+
+    if(op) delete objCartShop[idProduct]
+};
+ 
+function printTotal(){
     const arrayCartShop = Object.values(objCartShop);
-
-    if (!arrayCartShop.length)
-        return (contentCartShopTotal.innerHTML = `<h3>Carrito vacio</h3>`);
-
-    let total = arrayCartShop.reduce((acum, curr) => {
-        acum += curr.price * curr.amount;
+    if(!arrayCartShop.length)
+        return(contentCartShopTotal.innerHTML = `<h3>Carrito vacio</h3>`)
+    
+    let total = arrayCartShop.reduce((acum,curr)=>{
+       acum+=(curr.price * curr.amount);
+        
         return acum;
-    }, 0);
+    },0);
 
     contentCartShopTotal.innerHTML = `
-        <h3>${total}</h3>
+    <div class='buy__total'>
+        <h3> Price Total: ${total}.00</h3>
+        <h3> Tax: 0.00</h3>
         <button class="btn btn__buy">Comprar</button>
-    `;
+    </div>
+    `
+
 }
 
-function printFoods() {
+
+//loading Academlo
+const loadingAcademlo = () =>{
+    const containerLoading = document.querySelector('.loading');
+    window.addEventListener('load', ()=>{
+
+        setTimeout(()=>{
+            containerLoading.style.display = 'none';
+        },500);
+
+    });
+}
+
+
+
+function printProducts() {
     let html = "";
 
-    foods.forEach(({ id, name, price, stock, urlImage }) => {
+       products.forEach(({ id, name, price, stock, urlImage }) => {
         const btnBuy = stock
-            ? `<button class="btn btn__add" id="${id}">Agregar</button>`
+            ? `<button class="button products__button" data-id="3" id="${id}">+</button>`
             : `<button class="btn btn__nodrop">No disponible</button>`;
 
         html += `
-        <div class="food">
-            <div class="food__img">
-                <img src="${urlImage}" alt="${name}">
-            </div>
-            <div class="food__body">
-                <h3>${name}</h3>
-                <p><span>$${price}</span> - stock: ${stock}</p>
-            </div>
-            <div class="food__options">
+
+        <div class="filter filter__${name}">
+            <p class="productimage"> <img src="${urlImage}" alt="${name}"> </p>
+
+            <h2 class="products__price">$${price} <span class="products__quantity">| Stock: ${stock}</span></h2>
+
+            <div class="food__options"> 
                 ${btnBuy}
-            </div>
+            </div>            
+            
+            <h3>${name}</h3>
+
         </div>
+
+
     `;
     });
 
-    contentFoods.innerHTML = html;
+    contentProduct.innerHTML = html;
+    
 }
 
-function printFoodsInCart() {
+
+
+
+contentProduct.addEventListener("click",(e)=>{
+    
+    if(e.target.classList.contains('button')){
+        const idProduct = Number(e.target.id);
+
+        const currentProducts = products.find((product) => product.id === idProduct);
+
+        if(objCartShop[currentProducts.id]){
+            addProduct(idProduct);
+
+        }else{
+            objCartShop[currentProducts.id] = { ...currentProducts};
+            objCartShop[currentProducts.id].amount =1;
+        }
+        
+        printFoodsInCart();
+    };
+});
+
+function printFoodsInCart() { 
     let html = "";
 
     const arrayCartShop = Object.values(objCartShop);
 
     arrayCartShop.forEach(({ id, name, price, amount, urlImage }) => {
         html += `
-        <div class="food">
-            <div class="food__img">
+        
+        <div class="productin__cart">
+            <div class="productin__img">
                 <img src="${urlImage}" alt="${name}">
             </div>
-            <div class="food__body">
+            <div class="productcart__body">
                 <h3>${name}</h3>
                 <p><span>$${price}</span> - cant: <strong>${amount}</strong></p>
             </div>
-            <div class="food__options">
+            <div class="productcart__options">
                 <button class="btn btn__rest" id="${id}">-</button>
                 <button class="btn btn__add" id="${id}">+</button>
                 <button class="btn btn__del" id="${id}">del</button>
@@ -170,79 +190,65 @@ function printFoodsInCart() {
     });
 
     contentCartShopItems.innerHTML = html;
-
     printTotal();
     countProduct();
+
 }
 
-contentFoods.addEventListener("click", (e) => {
-    if (e.target.classList.contains("btn__add")) {
-        const idFood = Number(e.target.id);
+contentCartShopItems.addEventListener("click",(e)=>{
 
-        const currentFood = foods.find((food) => food.id === idFood);
 
-        if (objCartShop[currentFood.id]) {
-            addFood(idFood);
-        } else {
-            objCartShop[currentFood.id] = { ...currentFood };
-            objCartShop[currentFood.id].amount = 1;
-        }
+    if(e.target.classList.contains('btn__rest')){
+        const idProduct=Number(e.target.id);
 
-        printFoodsInCart();
+        if(objCartShop[idProduct].amount==1){
+           deleteProduct(idProduct);           
+        } else{
+            objCartShop[idProduct].amount--;
+        }        
     }
-});
+    if(e.target.classList.contains('btn__add')){
 
-contentCartShopItems.addEventListener("click", (e) => {
-    if (e.target.classList.contains("btn__add")) {
-        const idFood = Number(e.target.id);
-        addFood(idFood);
+        const idProduct=Number(e.target.id);
+
+        addProduct(idProduct);     
+      
     }
+    if(e.target.classList.contains('btn__del')){
+        const idProduct=Number(e.target.id);
 
-    if (e.target.classList.contains("btn__rest")) {
-        const idFood = Number(e.target.id);
+        deleteProduct(idProduct);
 
-        if (objCartShop[idFood].amount === 1) {
-            deletefood(idFood);
-        } else {
-            objCartShop[idFood].amount--;
-        }
-    }
-
-    if (e.target.classList.contains("btn__del")) {
-        const idFood = Number(e.target.id);
-
-        deletefood(idFood);
     }
 
     printFoodsInCart();
-});
-
-iconCart.addEventListener("click", () => {
-    contentCartShop.classList.toggle("contentCartShop__show");
-});
+});   
 
 contentCartShopTotal.addEventListener("click", (e) => {
     if (e.target.classList.contains("btn__buy")) {
         const op = confirm("Estas seguro de esto?");
 
         if (op) {
-            foods = foods.map((food) => {
-                if (objCartShop[food.id]?.id === food.id) {
+            products = products.map((product) => {
+                if (objCartShop[product.id]?.id === product.id) {
                     return {
-                        ...food,
-                        stock: food.stock - objCartShop[food.id].amount,
+                        ...product,
+                        stock: product.stock - objCartShop[product.id].amount,
                     };
                 } else {
-                    return food;
+                    return product;
                 }
             });
 
             objCartShop = {};
-            printFoods();
+            printProducts();
             printFoodsInCart();
         }
     }
 });
 
-printFoods();
+
+
+loadingAcademlo();
+printProducts();
 printTotal();

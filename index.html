@@ -8,30 +8,273 @@
     <title>Document</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="./assets/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"
+        integrity="sha512-nKZDK+ztK6Ug+2B6DZx+QtgeyAmo9YThZob8O3xgjqhw2IVQdAITFasl/jqbyDwclMkLXFOZRiytnUrXk/PM6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
 </head>
 
 <body>
-    <nav class="navbar">
-        <a href="#" class="logo">RAPPIYAN</a>
 
-        <i class='bx bx-cart-alt'>
-            <span class="countFood">0</span>
-        </i>
-    </nav>
+    <div class="loading">
+        <div class="load">
+            <svg width="90" height="90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48.92 56.48" class="load__gif"
+                fill="#fff">
+                <title>Academlo Logo</title>
+                <g>
+                    <g>
+                        <path
+                            d="M24.45,56.48,0,42.36V14.12L24.46,0,48.92,14.12V42.36ZM1.89,41.26l22.56,13L47,41.26v-26l-22.56-13-22.56,13Z"
+                            fill="#242635">
 
-    <div class="contentFoods mt__nav"></div>
-
-    <div class="contentCartShop">
-        <div class="contentCartShop__items"></div>
-        <div class="contentCartShop__total"></div>
+                        </path>
+                        <path
+                            d="M28.58,15.39H25.16L35.78,36H31.49L20.67,15.71,8.23,38.82H18.94l3-5.43h-3.4l-1.47,2.54h-4l2.69-5.09H25.85l4.28,8H40.67ZM17.23,28.21l3.57-6.6,3.57,6.6Z">
+                        </path>
+                    </g>
+                </g>
+            </svg>
+        </div>
     </div>
 
-    <footer>
-        <p>Esto lo hice yo y aqui esta <a href="https://github.com/bsqmAcademlo/repo_shopcart" target="_blank">mi
-                repo</a></p>
+
+    <div class="container">
+
+        <nav class="navbar">
+
+            <div class="navbar__menu">
+                <a href="#" class="logo">
+                    <svg heigth="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48.92 56.48" fill="#e94959"
+                        class="navlogo-icon">
+                        <title>Academlo Logo</title>
+                        <g>
+                            <g>
+                                <!-- <path d="M24.45,56.48,0,42.36V14.12L24.46,0,48.92,14.12V42.36ZM1.89,41.26l22.56,13L47,41.26v-26l-22.56-13-22.56,13Z"></path> -->
+                                <path
+                                    d="M28.58,15.39H25.16L35.78,36H31.49L20.67,15.71,8.23,38.82H18.94l3-5.43h-3.4l-1.47,2.54h-4l2.69-5.09H25.85l4.28,8H40.67ZM17.23,28.21l3.57-6.6,3.57,6.6Z">
+                                </path>
+                            </g>
+                        </g>
+                    </svg> STORE
+                </a>
+                <ul class="navbar__item">
+                    <li><a href="#details__content" class="nav__home1">Home</a></li>
+                    <li><a href="#main__products" class="nav__products1">Products</a></li>
+                </ul>
+
+            </div>
+            <div class="navbar__icons">
+
+                <!-- <a href="#"><i class='bx bx-moon'></i></a> -->
+
+                <a href="#"><i class='bx bx-cart-alt'></i>
+
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M21 4H2v2h2.3l3.28 9a3 3 0 0 0 2.82 2H19v-2h-8.6a1 1 0 0 1-.94-.66L9 13h9.28a2 2 0 0 0 1.92-1.45L22 5.27A1 1 0 0 0 21.27 4 .84.84 0 0 0 21 4zm-2.75 7h-10L6.43 6h13.24z"></path><circle cx="10.5" cy="19.5" r="1.5"></circle><circle cx="16.5" cy="19.5" r="1.5"></circle></svg>
+ -->
+                    <span class="cart__count">0</span>
+                </a>
+                <!-- <a href="#"><i class='bx bx-grid-alt'></i></a> -->
+            </div>
+        </nav>
+
+
+        <section class="details__content" id="details__content">
+            <div class="details__image">
+                <img src="assets/images/home.png" alt="">
+            </div>
+            <div class="details__description">
+                <h1 class="details__title">New Sweatshirt<br>
+                    COLLECTIONS 2022
+                </h1>
+                <p class="details__text text__color">Latest arrival of the new Hanes Midweight Crewneck sweatshirt
+                    imported from the 2022 series, with a modern design.</p>
+                <h3 class="details__price">$14.00</h3>
+                <div class="details__buttons">
+                    <a href="#">Discover</a>
+                    <a href="#">ADD TO CART</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="filters">
+            <div class="tags">
+                <div data-filter="all">
+                    <h3>Show All</h3>
+                    <p class="text__color">show all products</p>
+                </div>
+                <div data-filter=".filter__Hoddies">
+                    <h3>Hoddies</h3>
+                    <p class="text__color">4 products</p>
+                </div>
+                <div data-filter=".filter__Shirt">
+                    <h3>Shirt</h3>
+                    <p class="text__color">4 products</p>
+                </div>
+                <div data-filter=".filter__Sweatshirts">
+                    <h3> Sweatshirts</h3>
+                    <p class="text__color">4 products</p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section class="main__filter">
+
+            <div class="filter filter_Hoodies">
+                <p class="productimage"> <img src="./assets/images/featured1.png"> </p>
+
+                <h2 class="products__price">$14.00 <span class="products__quantity">| Stock: 20</span></h2>
+
+                <button class="button products__button" data-id="3">
+                    <i class="bx bx-plus"></i>
+                </button>
+                <h3>Hoddies</h3>
+
+            </div>
+            
+
+
+            <!-- 
+            <div class="filter filter__shirt">
+                <p class="productimage"><img src="./assets/images/featured2.png"></p>
+                <h2 class="products__price">$24.00 <span class="products__quantity">| Stock: 20</span></h2>
+
+                <button class="button products__button" data-id="3">
+                    <i class="bx bx-plus"></i>
+                </button>
+                <h3>Shirts</h3>
+            </div>
+
+            <div class="filter filter__sweatshirts">
+                <p class="productimage"><img src="./assets/images/featured3.png"></p>
+                <h2 class="products__price">$24.00 <span class="products__quantity">| Stock: 20</span></h2>
+
+                <button class="button products__button" data-id="3">
+                    <i class="bx bx-plus"></i>
+                </button>
+                <h3>Sweetshirts</h3>
+            </div>
+ -->
+        </section>
+
+        <section class="main__products" id="main__products">
+
+        </section>
+        <section class="main__shoppingCart">
+            
+            <h3>My Cart</h3>
+
+            <div class="contentCartShop__items">
+
+            </div>
+
+            <div class="contentCartShop__total"> 
+
+                <div class="total__sum">
+                    <p class="text__color total__sum--items">items 0</p>
+                    <p class="total__sum--price">$0.00</p>
+                </div>
+            </div>
+
+
+            <div class="checkout">
+                <a href="#" class="text__color">checkout</a>
+            </div>
+
+        </section>
+
+
+    </div>
+
+    <footer class="footer section">
+        <div class="footer__container container">
+            <div class="footer__content">
+                <h3 class="footer__title">Our information</h3>
+
+                <ul class="footer__list">
+                    <li>Medellin - Colombia</li>
+                </ul>
+            </div>
+            <div class="footer__content">
+                <h3 class="footer__title">About Us</h3>
+
+                <ul class="footer__links">
+                    <li>
+                        <a href="#" class="footer__link">Support Center</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">Customer Support</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">About Us</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">Copy Right</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title">Product</h3>
+
+                <ul class="footer__links">
+                    <li>
+                        <a href="#" class="footer__link">Hoodies</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">Shirts</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__link">Sweatshirt</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title">Social</h3>
+
+                <ul class="footer__social">
+                    <a href="https://www.facebook.com/" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-facebook'></i>
+                    </a>
+
+                    <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-twitter'></i>
+                    </a>
+
+                    <a href="https://www.instagram.com/" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-instagram'></i>
+                    </a>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="hr"></div>
+
+        <span class="footer__copy">&#169; Realizado por Bismal Emmanuel Duran. Repositorio:</span>
     </footer>
 
+    <a href="#" class="scrollup" id="scroll-up">
+        <i class='bx bx-up-arrow-alt scrollup__icon'></i>
+    </a>
+
+
+
     <script src="./assets/main.js"></script>
+    <script>
+
+        mixitup('.main__filter', {
+            selectors: {
+                target: '.filter'
+            },
+            animation: {
+                duration: 400
+            }
+        }).filter('all');
+
+    </script>
 </body>
 
 </html>
